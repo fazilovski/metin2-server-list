@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Metin2 Server Listesi</title>
+</head>
+<body>
+
+    <h1>🔥 Metin2 Server Listesi</h1>
+
+    <input type="text" id="serverAdi" placeholder="Server adı yaz">
+    <button onclick="ekle()">Ekle</button>
+
+    <h2>Serverlar</h2>
+    <div id="liste"></div>
+
+    <script>
+    async function ekle() {
+        let ad = document.getElementById("serverAdi").value;
+
+        if(ad === "") {
+            alert("Boş bırakma!");
+            return;
+        }
+
+        await fetch("/ekle", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ ad: ad })
+        });
+
+        document.getElementById("serverAdi").value = "";
+
+        goster();
+    }
+
+    async function goster() {
+        let res = await fetch("/serverlar");
+        let data = await res.json();
+
+        let liste = document.getElementById("liste");
+        liste.innerHTML = "";
+
+        data.forEach(s => {
+            liste.innerHTML += "<p>🟢 " + s + "</p>";
+        });
+    }
+
+    goster();
+    </script>
+
+</body>
+</html>
