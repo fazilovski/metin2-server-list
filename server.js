@@ -2,7 +2,7 @@ const fs = require('fs');
 const http = require('http');
 const { MongoClient } = require('mongodb');
 
-const url = "mongodb+srv://azimligil62_db_user:<SPFh2LFFN6DzCBfQ>@cluster0.qmdoqsb.mongodb.net/?appName=Cluster0";
+const url = "mongodb+srv://azimligil62_db_user:<metin123>@cluster0.qmdoqsb.mongodb.net/metin2?retryWrites=true&w=majority;"
 const client = new MongoClient(url);
 
 let db;
@@ -58,7 +58,7 @@ const server = http.createServer(async (req, res) => {
 (async () => {
     await baglan();
 
-    const PORT = process.env.PORT || 3000;
+     PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
   console.log("Server çalıştı: " + PORT);
 });
