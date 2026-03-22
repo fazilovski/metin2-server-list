@@ -1,6 +1,6 @@
 const fs = require('fs');
 const http = require('http');
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 
 const url = "mongodb+srv://azimligil62_db_user:metin123@cluster0.qmdoqsb.mongodb.net/metin2?retryWrites=true&w=majority;"
 const client = new MongoClient(url);
@@ -34,23 +34,24 @@ const server = http.createServer(async (req, res) => {
         res.end(JSON.stringify(serverlar));
     }
 
-    else if (req.method === "POST" && req.url.startsWith("/ekle")) {
+    else if (req.method === "DELETE" && req.url.startsWith("/sil")) {
 
-        let body = "";
+    let body = "";
 
-        req.on("data", chunk => {
-            body += chunk.toString();
+    req.on("data", chunk => {
+        body += chunk.toString();
+    });
+
+    req.on("end", async () => {
+        const veri = JSON.parse(body);
+
+        await db.collection("serverlar").deleteOne({
+            _id: new ObjectId(veri.id)   // 👈 BURASI
         });
 
-        req.on("end", async () => {
-            const veri = JSON.parse(body);
-
-            await db.collection("serverlar").insertOne({ ad: veri.ad });
-
-            res.end(JSON.stringify({ mesaj: "Eklendi" }));
-        });
-    }
-
+        res.end(JSON.stringify({ mesaj: "Silindi" }));
+    });
+}
 });
 
 
