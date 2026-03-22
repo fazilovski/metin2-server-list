@@ -2,7 +2,7 @@ const fs = require('fs');
 const http = require('http');
 const { MongoClient } = require('mongodb');
 
-const url = "mongodb+srv://azimligil62_db_user:<metin123>@cluster0.qmdoqsb.mongodb.net/metin2?retryWrites=true&w=majority;"
+const url = "mongodb+srv://azimligil62_db_user:metin123@cluster0.qmdoqsb.mongodb.net/metin2?retryWrites=true&w=majority;"
 const client = new MongoClient(url);
 
 let db;
