@@ -2,7 +2,7 @@ const fs = require('fs');
 const http = require('http');
 const { MongoClient } = require('mongodb');
 
-const url = "mongodb://127.0.0.1:27017";
+const url = "mongodb+srv://azimligil62_db_user:<SPFh2LFFN6DzCBfQ>@cluster0.qmdoqsb.mongodb.net/?appName=Cluster0";
 const client = new MongoClient(url);
 
 let db;
