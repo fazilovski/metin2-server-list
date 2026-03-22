@@ -31,21 +31,22 @@
         });
 
         document.getElementById("serverAdi").value = "";
-
         goster();
     }
 
     async function goster() {
-        let res = await fetch("/serverlar");
-        let data = await res.json();
+  let res = await fetch("/serverlar");
+  let data = await res.json();
 
-        let liste = document.getElementById("liste");
-        liste.innerHTML = "";
+  let liste = document.getElementById("liste");
+  liste.innerHTML = "";
 
-        data.forEach(s => {
-            liste.innerHTML += "<p>🟢 " + s + "</p>";
-        });
-    }
+  data.forEach(server => {
+    let div = document.createElement("div");
+    div.textContent = server.ad; // 🔥 EN KRİTİK SATIR
+    liste.appendChild(div);
+  });
+}
 
     goster();
     </script>
